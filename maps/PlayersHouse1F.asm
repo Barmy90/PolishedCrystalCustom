@@ -98,6 +98,12 @@ MomEventScript:
 .NoInstructions:
 	writetext MomOutroText
 	waitbutton
+	givepoke TOTODILE, NO_FORM, 5, ORAN_BERRY
+	givepoke CYNDAQUIL, NO_FORM, 5, ORAN_BERRY
+	givetmhm HM_WATERFALL
+	givetmhm HM_SURF
+	givetmhm HM_STRENGTH
+	givetmhm TM_ROCK_SMASH
 	closetext
 	turnobject PLAYERSHOUSE1F_MOM1, LEFT
 	special RestartMapMusic

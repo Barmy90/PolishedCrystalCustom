@@ -594,8 +594,15 @@ TrySurfOW::
 
 	ld d, SURF
 	call CheckPartyMove
+	jr nc, .continue
+	jr c, .checkwaterfall
+
+.checkwaterfall
+	ld d, WATERFALL
+	call CheckPartyMove
 	jr c, .quit
 
+.continue
 	ld hl, wOWState
 	bit OWSTATE_BIKING_FORCED, [hl]
 	jr nz, .quit
@@ -831,7 +838,16 @@ Script_AutoWaterfall:
 TryWaterfallOW::
 	ld d, WATERFALL
 	call CheckPartyMove
+	jr nc, .continue
+	jr c, .checksurf
+
+.checksurf
+	ld d, SURF
+	call CheckPartyMove
+	jr nc, .continue
 	jr c, .failed
+
+.continue
 	ld de, ENGINE_RISINGBADGE
 	call CheckEngineFlag
 	jr c, .failed
@@ -1128,14 +1144,21 @@ AskStrengthScript:
 	endtext
 
 TryStrengthOW:
-	ld d, STRENGTH
-	call CheckPartyMove
-	jr c, .nope
-
 	ld de, ENGINE_PLAINBADGE
 	call CheckEngineFlag
 	jr c, .nope
 
+	ld d, STRENGTH
+	call CheckPartyMove
+	jr nc, .continue
+	jr c, .checkrocksmash
+
+.checkrocksmash
+	ld d, ROCK_SMASH
+	call CheckPartyMove
+	jr c, .nope
+
+.continue
 	ld hl, wOWState
 	bit OWSTATE_STRENGTH, [hl]
 	jr z, .already_using
@@ -1280,7 +1303,22 @@ Script_AutoWhirlpool:
 TryWhirlpoolOW::
 	ld d, WHIRLPOOL
 	call CheckPartyMove
+	jr nc, .continue
+	jr c, .checksurf
+
+.checksurf
+	ld d, SURF
+	call CheckPartyMove
+	jr nc, .continue
+	jr c, .checkwaterfall
+
+.checkwaterfall
+	ld d, WATERFALL
+	call CheckPartyMove
+	jr nc, .continue
 	jr c, .failed
+
+.continue
 	ld de, ENGINE_GLACIERBADGE
 	call CheckEngineFlag
 	jr c, .failed
@@ -1474,8 +1512,15 @@ MovementData_RockSmash:
 
 AskRockSmashScript:
 	callasm HasRockSmash
+	ifequal 0, .continue
+	ifequal 1, .checkstrength
+
+.checkstrength
+	callasm HasStrength
+	ifequal 0, .continue
 	ifequal 1, .no
 
+.continue
 	checkflag ENGINE_ROCK_SMASH_ACTIVE
 	iftrue AutoRockSmashScript
 	opentext
@@ -1489,6 +1534,15 @@ AskRockSmashScript:
 
 HasRockSmash:
 	ld d, ROCK_SMASH
+	call CheckPartyMove
+	; a = carry ? 1 : 0
+	sbc a
+	and 1
+	ldh [hScriptVar], a
+	ret
+
+HasStrength:
+	ld d, STRENGTH
 	call CheckPartyMove
 	; a = carry ? 1 : 0
 	sbc a
