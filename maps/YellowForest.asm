@@ -143,6 +143,7 @@ YellowForestWalkerScript:
 	writetext YellowForestWalkerAfterText
 	promptbutton
 	verbosegivetmhm HM_FLY
+	givekeyitem SKY_TAXI
 	setevent EVENT_GOT_HM02_FLY
 	writetext YellowForestWalkerFinalText
 	waitbutton

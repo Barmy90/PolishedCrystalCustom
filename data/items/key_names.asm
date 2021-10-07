@@ -30,5 +30,6 @@ KeyItemNames::
 	li "Catch Charm"
 	li "SilphScope2"
 	li "Apricorn Box"
+	li "Sky Taxi"
 	li "Type Chart"
 	assert_list_length NUM_KEY_ITEMS + 1

@@ -614,5 +614,6 @@ NUM_APRICORNS EQU const_value - 1
 	const CATCH_CHARM  ; 1a
 	const SILPHSCOPE2  ; 1b
 	const APRICORN_BOX ; 1c
-	const TYPE_CHART   ; 1d
+	const SKY_TAXI		 ; 1d
+	const TYPE_CHART   ; 1e
 NUM_KEY_ITEMS EQU const_value

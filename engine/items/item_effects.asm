@@ -311,6 +311,7 @@ KeyItemEffects:
 	dw IsntTheTimeMessage ; CATCH_CHARM
 	dw IsntTheTimeMessage ; SILPHSCOPE2
 	dw ApricornBox        ; APRICORN_BOX
+	dw FlyFunction				; SKY_TAXI
 	dw TypeChart          ; TYPE_CHART
 	assert_table_length NUM_KEY_ITEMS
 

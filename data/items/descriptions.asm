@@ -286,6 +286,7 @@ KeyItemDescriptions:
 	dw CatchCharmDesc
 	dw SilphScope2Desc
 	dw ApricornBoxDesc
+	dw SkyTaxiDesc
 	dw TypeChartDesc
 
 PokeBallDesc:
@@ -1208,7 +1209,7 @@ LaggingTailDesc:
 
 IronBallDesc:
 	db   "Lowers Speed and"
-	next "grounds. (Hold)@" 
+	next "grounds. (Hold)@"
 
 RingTargetDesc:
 	db   "Loses type immun-"
@@ -1373,6 +1374,10 @@ SilphScope2Desc:
 ApricornBoxDesc:
 	db   "Holds up to 99 of"
 	next "each Apricorn.@"
+
+SkyTaxiDesc:
+	db   "Use to call a"
+	next "Skarmory Sky Taxi.@"
 
 TypeChartDesc:
 	db   "Summarizes all"
